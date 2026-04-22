@@ -75,7 +75,7 @@ One important note: unlike projects that search for specific emotional words, th
 - Generally smoother and more stable year to year
 
 **USA (blue dashed line):**
-- Much more volatile — big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump era)
+-  Big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump era)
 - Drops to its lowest point (~5.24) right around the Iraq War in 2003
 - Has been trending downward since around 2008
 
