@@ -62,12 +62,6 @@ One important note: unlike projects that search for specific emotional words, th
 
 ![China vs USA emotional tone](figures/china_vs_usa.png)
 
-## Results and Figures
-
-### Figure 1 — Emotional Tone Over Time
-
-![China vs USA emotional tone](figures/china_vs_usa.png)
-
 **China (red line):**
 - Starts low (~5.28) in 1972 when the PRC first joined the UN
 - Gradually climbs upward over 50 years
@@ -75,7 +69,7 @@ One important note: unlike projects that search for specific emotional words, th
 - Generally smoother and more stable year to year
 
 **USA (blue dashed line):**
--  Big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump era)
+- Big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump era)
 - Drops to its lowest point (~5.24) right around the Iraq War in 2003
 - Has been trending downward since around 2008
 
