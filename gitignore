@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/raw/TXT/
+data/raw/UNGDC_1946-2025.tar.gz
