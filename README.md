@@ -1,5 +1,4 @@
-# Emotional Tone of UN General Debate Speeches: China (PRC) vs USA (1972–2025)
-## Applying the labMT Hedonometer
+# Emotional Tone of UN General Debate Speeches: China (PRC) vs USA (1972–2025) :A Digital Humanities Study Applying the labMT Hedonometer
 
 ---
 
