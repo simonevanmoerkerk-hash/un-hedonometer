@@ -27,29 +27,26 @@ However,the OOV analysis adds an important layer. What the score is actually pic
 # Corpus and Provenance
 
 
-## Where the data came from
+## Where The Data Came From
 The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972, as this is the year that PRC joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
 
-#### What metadata enables the comparison
+## What Metadata Enables the Comparison
 The speeches are stored as plain text files, organised by year and country. Each filename follows the format `CHN_26_1971.txt` (country code, session number, year). The metadata that makes this comparison meaningful is the country code and year, which allows tracking each countries tone over the years.
 
-### What the source leaves out
+## What The Source Leaves Out
 It is worth noting that speeches were originally delivered in the speaker's native language and then translated into English by UN staff. China's speeches were therefore originally in Mandarin. This means we are measuring a translated version of Chinese diplomacy, which is a limitation discussed further in the reflection section.
 
 - Only one speech per country per year,  not all UN activity throughout the year
 - Speeches were originally delivered in the speaker's native language and translated into English by UN staff. China's speeches were therefore originally in Mandarin
 - The corpus does not include speeches from UN Security Council meetings, committee sessions, or other UN forums
 
-**Source:** https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0TJX8Y
-
-**Date of access:** April 2026
+Source: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0TJX8Y
+Date of access: April 2026
 
 **How this corpus differs from the first attempt:** The first project used artwork titles from the Metropolitan Museum of Art API. This project uses political UN speeches from a completely different source, domain, and institution. The comparison here is longitudinal (over time) rather than categorical (Eastern vs Western aesthetic concepts).
 
 ### Ethics
 The corpus contains only official government statements delivered at a public international forum. No personal data or private information is involved. The corpus is publicly available and free to use for research purposes.
-
- The corpus only includes the annual General Debate speech. not all UN speeches a country makes throughout the year. It also does not capture tone in the original language, only in English translation.
 
 ---
 
