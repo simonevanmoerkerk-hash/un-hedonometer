@@ -1,9 +1,9 @@
-# Emotional Tone of UN General Debate Speeches: China (PRC) vs USA (1972–2025) :A Digital Humanities Study Applying the labMT Hedonometer
+# Emotional Tone of UN General Debate Speeches: People's Republic of China (PRC) vs United States of America (1972–2025): A Digital Humanities Study Applying the labMT Hedonometer
 
 ---
 
 ## Research Question
-This project looks at how emotional language differs between China and the USA by applying the labMT hedonometer to UN General Debate speeches from 1972 to 2025. The central research question asks:
+This project looks at how emotional language differs between the People's Republic of China and the United States of America by applying the labMT hedonometer to UN General Debate speeches from 1972 to 2025. The central research question asks:
 
 **How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?**
 
@@ -30,7 +30,7 @@ However,the OOV analysis adds an important layer. What the score is actually pic
 
 
 ## UN General Debate Corpus
-The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972. The People Republic of China (PRC) joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
+The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972. The People's Republic of China (PRC) joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
 
 The speeches are stored as plain text files, organised by year and country. Each filename follows the format `CHN_27_1972.txt` (country code, session number, year). The metadata that makes this comparison meaningful is the country code and year, which allows tracking each countries tone over the years.
 
@@ -113,7 +113,7 @@ To check whether the overall difference is statistically significant, This proje
 ![Bootstrap China vs USA](figures/bootstrap_china_usa.png)
 > *Bootstrap distribution of the difference in mean happiness scores between China and the USA over 10,000 iterations. The red line marks the observed difference (0.0351). Dashed grey lines mark the 95% confidence interval [0.0073, 0.0625]. The dotted line at zero is not inside the interval.*
 
-What "statistically significant" actually means here is worth being careful about. It means the gap is unlikely to come from random sampling noise. It does not mean the gap is large or important in everyday terms. A difference of 0.035 points on a 1 to 9 scale is small. 
+What statistically significant actually means here is worth being careful about. It means the gap is unlikely to come from random sampling noise. It does not mean the gap is large or important in everyday terms. A difference of 0.035 points on a 1 to 9 scale is small. 
 
 ### Figure 4 — Average Score by Leadership Era
 ![Leaders bar chart](figures/china_vs_usa_leaders.png)
