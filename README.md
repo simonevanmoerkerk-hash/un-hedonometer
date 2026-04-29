@@ -3,16 +3,18 @@
 ---
 
 ## Research Question
+This project looks at how emotional language differs between China and the USA by applying the labMT hedonometer to UN General Debate speeches from 1972 to 2025. The central research question asks:
 
-How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?
+*How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?*
+
+The question is also about the tool itself. The labMT hedonometer was built from one variety of English: American, contemporary, drawn from informal sources like Twitter and song lyrics. China's UN speeches are also in English, but a very different kind of English. They are translated from Mandarin by UN staff, written in a formal diplomatic register, and built around political vocabulary that the lexicon was not designed to read. By comparing the two countries over 50 years, this project asks not only what the scores show, but also what kinds of language the tool can read and what it cannot.Therefore, the instrument becomes part of the analysis.
 
 
 ## Relevance
 
-This matters for Digital Humanities because it raises a question: can we read shifts in global power through language scores? Especially, considering that the labMT tool was built from American English sources like Twitter and the New York Times. And China's speeches were not originally delivered in English. They were spoken in their native language and then translated into English by UN staff. So what we are actually measuring is a translator's English version of Chinese diplomacy, not the original words. That adds another layer of uncertainty: differences in scores between China and the USA might reflect genuine shifts in tone, the tool's Western bias, or simply differences in how UN translators render Chinese into English.
+Digital Humanities research often uses sentiment analysis without questioning how the tool itself works across different contexts. This project asks a similar basic question: can a happiness lexicon built from contemporary American English actually capture diplomatic English used by a non-Western state? The UN General Debate is one of the few forums where every country speaks in a comparable format every year, which makes it an  good corpus for tracking how nations present themselves over time. China and the USA are especially interesting to compare because the past 50 years have seen a major shift in global power between them.
 
-This question matters for Digital Humanities as it uses computational methods to trace how two global power present themselves through language. The UN General Debate is one of the few forums where every country speaks in a comparable format every year. Which makes it the ideal corpus for longitudinal comparison. By applying the labMT hedonometer to 54 years of diplomatic speech, this project asks whether shifts in global power are reflected in change in linguistic tone, and whether a sentiment tool built from American English captures those changes equally for both countries.
-
+This matters for Digital Humanities more broadly because computational tools are never neutral. They carry the assumptions of the contexts they were built in. The labMT lexicon was built from American English sources like Twitter, the New York Times, and song lyrics, rated by US-based workers on Mechanical Turk. None of those sources are diplomatic, and none of them are non-Western. By applying this tool to UN speeches, this project does not try to fix that mismatch. It uses the mismatch as part of the analysis, treating what the tool can and cannot read as a meaningful part of the result.
 
 ## Main Finding
 The most interesting finding in this project is that China and the USA swap positions around 2000. before that, the USA scored higher, and after that, China does. This lines up with real world events: China joining the WTO, the Beijing Olympics, Xi Jinping coming to power, while the USA was dealing with 9/11, the Iraq War, and growing political divisions.
@@ -97,9 +99,7 @@ Therefore, the final dataset contains 108 speeches in total, 54 from China and 5
 ![China vs USA emotional tone](figures/china_vs_usa.png)
 > *Mean labMT happiness score per year for China (PRC, red solid line) and the USA (blue dashed line) from 1972 to 2025. Vertical dotted lines mark major geopolitical events. The y-axis is restricted to 5.2 to 5.7 to make differences visible, since labMT scores for long texts tend to cluster near 5.*
 
-One thing you can see in the figure 1 Starts low (~5.28) in 1972 when the PRC first joined the UN, after 50 years is gradually climbs upwards, and by the 2000s is higher than the USA, generally smoother and more stable year to year
-
-In america the figure is much more volatile, with big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump). Additionally it drops to its lowest point (~5.24) right around the Iraq War in 2003 and has been trending downward in comparison to china since 2008
+One thing you can see in the figure 1 Starts low (~5.28) in 1972 when the PRC first joined the UN, after 50 years is gradually climbs upwards, and by the 2000s is higher than the USA, generally smoother and more stable year to year. In america the figure is much more volatile, with big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump). Additionally it drops to its lowest point (~5.24) right around the Iraq War in 2003 and has been trending downward in comparison to china since 2008
 
 
 After seeing Figure 1, I was curious whether neutral words were flattening the scores. So I ran the analysis again removing all words scoring between 4.0 and 6.0, which only keeps the strong emotionally charged words. The pattern from Figure 1 becomes much clearer here. The gap between China and the USA is more visible, and the USA's dip around 2001–2003 is much more dramatic.
@@ -156,6 +156,7 @@ This also shows the unpredictable nature of US diplomatic tone compared to China
 ## How to Run
 
 ### Repository Structure
+```
 un-hedonometer/
 ├── README.md
 ├── requirements.txt
@@ -176,6 +177,7 @@ un-hedonometer/
 │   └── processed/
 │       └── speeches_scored.csv
 └── figures/
+```
 
 ### Setup
 
