@@ -54,7 +54,7 @@ usa_vals = [x[1] for x in usa_scores]
 bars1 = ax1.barh(usa_names, usa_vals, color="#003087", alpha=0.75)
 ax1.set_xlim(5.2, 5.65)
 ax1.set_xlabel("Mean Happiness Score (labMT)", fontsize=10)
-ax1.set_title("USA — Average Score\nby President", fontsize=12)
+ax1.set_title("USA: Average Score\nby President", fontsize=12)
 ax1.axvline(x=sum(usa_vals)/len(usa_vals), color="gray",
             linewidth=1.5, linestyle="--", label="USA average")
 ax1.legend(fontsize=9)
@@ -70,7 +70,7 @@ china_vals = [x[1] for x in china_scores]
 bars2 = ax2.barh(china_names, china_vals, color="#DE2910", alpha=0.75)
 ax2.set_xlim(5.2, 5.65)
 ax2.set_xlabel("Mean Happiness Score (labMT)", fontsize=10)
-ax2.set_title("China — Average Score\nby Leader", fontsize=12)
+ax2.set_title("China: Average Score\nby Leader", fontsize=12)
 ax2.axvline(x=sum(china_vals)/len(china_vals), color="gray",
             linewidth=1.5, linestyle="--", label="China average")
 ax2.legend(fontsize=9)
@@ -80,7 +80,7 @@ for bar, val in zip(bars2, china_vals):
     ax2.text(val + 0.002, bar.get_y() + bar.get_height()/2,
              f"{val:.3f}", va="center", fontsize=9)
 
-fig.suptitle("Mean Happiness Score of UN Speeches by Leadership Era (1972–2025)",
+fig.suptitle("Mean Happiness Score of UN Speeches by Leadership Era (1972-2025)",
              fontsize=13, y=1.02)
 
 plt.tight_layout()
