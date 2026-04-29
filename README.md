@@ -5,12 +5,10 @@
 
 ## Research Question
 
-How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1971, and how does that trajectory compare to the United States over the same period(1971-2025)?
+How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?
 
 
 ## Relevance
-
-The most interesting finding in this project is that China and the USA swap positions around 2000. before that, the USA scored higher, and after that, China does. This lines up with real world events: China joining the WTO, the Beijing Olympics, Xi Jinping coming to power, while the USA was dealing with 9/11, the Iraq War, and growing political divisions.
 
 This matters for Digital Humanities because it raises a question: can we read shifts in global power through language scores? Especially, considering that the labMT tool was built from American English sources like Twitter and the New York Times. And China's speeches were not originally delivered in English. They were spoken in their native language and then translated into English by UN staff. So what we are actually measuring is a translator's English version of Chinese diplomacy, not the original words. That adds another layer of uncertainty: differences in scores between China and the USA might reflect genuine shifts in tone, the tool's Western bias, or simply differences in how UN translators render Chinese into English.
 
@@ -18,6 +16,9 @@ This question matters for Digital Humanities as it uses computational methods to
 
 
 ## Main Finding
+The most interesting finding in this project is that China and the USA swap positions around 2000. before that, the USA scored higher, and after that, China does. This lines up with real world events: China joining the WTO, the Beijing Olympics, Xi Jinping coming to power, while the USA was dealing with 9/11, the Iraq War, and growing political divisions.
+
+However, the OOV analysis adds an important layer onto China's most frequent missing words. Words such as "aggression", "hegemonism", "imperialism", tend toward confrontational language. If these were in the labMT dictionary, China's scores might be lower. This means the finding should be read carefully rather than taken at face value.
 
 ---
 
@@ -25,10 +26,7 @@ This question matters for Digital Humanities as it uses computational methods to
 
 
 ### Where the data came from
-The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972, leaving 108 speeches in total: 54 per country.
-
-### UN General Debate Corpus
-To test the research question, UN speeches were collected from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains 11,141 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972, leaving 108 speeches in total: 54 per country.
+The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972, as this is the year that PRC joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
 
 ### What metadata enables the comparison
 The speeches are stored as plain text files, organised by year and country. Each filename follows the format `CHN_26_1971.txt` (country code, session number, year). The metadata that makes this comparison meaningful is the country code and year, which allows tracking each countries tone over the years.
@@ -56,20 +54,25 @@ The corpus contains only official government statements delivered at a public in
 ## Measurement
 
 ### Tokenisation
-Each speech was lowercased and split into words using a simple regex pattern (`re.findall(r"[a-z]+"`) that extracts only letter sequences. This removes punctuation, numbers, and special characters automatically. No stopwords were removed — words like "the", "and", "of" are kept because removing them would push scores toward extremes and make comparisons less fair.
+Each speech was lowercased and split into words using a simple regex pattern (`re.findall(r"[a-z]+"`) that extracts only letter sequences. This removes punctuation, numbers, and special characters automatically. No stopwords were removed.
+
+The filtered analysis (Figure 2) removes words based on their happiness score at a later stage. This is explained under Scoring Choices.
 
 ### labMT Matching
 Each word was looked up in the labMT 1.0 lexicon (Dodds et al., 2011), which contains 10,222 English words rated on a happiness scale from 1 to 9 by workers on Amazon Mechanical Turk. A score of 1 means very negative (like "terrorist" or "death"), 9 means very positive (like "laughter" or "love"), and 5 is neutral. Words that matched were averaged together to produce one happiness score per speech. Words that did not match were ignored.
 
 ### Scoring Choices
-Each speech receives one happiness score, the average of all matched words. A separate filtered analysis (Figure 2) removes words scoring between 4.0 and 6.0 as a robustness check, keeping only emotionally charged words to see if the pattern holds.
+Each speech gets one happiness score, which is the average of all the matched words in that speech. So instead of looking at individual sentences, the whole speech is collapsed into one number. This project is nterested in the overall tone of each country per year, not specific moments within a speech.
+
+One side effect of this is that long speeches with lots of neutral words will always produce scores close to 5. Which is the middle of the labMT scale. This is why the scores in Figure 1 sit between 5.2 and 5.7, even though the speeches are about genuinely emotional topics like war, peace, and geopolitical conflict. I was curious whether this was hiding real differences, so I ran the analysis again but this time removed all words scoring between 4.0 and 6.0. This follows the approach suggested by Dodds et al. (2011) in the original labMT paper. The result is Figure 2 and the pattern becomes clearer.
+
 
 ### Coverage and OOV
 Coverage measures the proportion of words in a speech that were successfully matched to the labMT lexicon. China's mean coverage is slightly lower than the USA's across all decades (see Figure 5), which suggests that the tool engages with China's diplomatic vocabulary slightly less well.
 
 #### Figure 5 — labMT Coverage by Decade
 ![Coverage by decade](figures/coverage_by_decade.png)
-China (red) consistently has lower coverage than the USA (blue) in every single decade. China's coverage drops in the 2020s to about 0.905, while the USA stays at 0.925. This means more of China's recent speeches contain words the labMT dictionary doesn't recognise.
+!!China (red) consistently has lower coverage than the USA (blue) in every single decade. China's coverage drops in the 2020s to about 0.905, while the USA stays at 0.925. This means more of China's recent speeches contain words the labMT dictionary doesn't recognise.
 
 Additionally, the OOV analysis (see figure 6) reveals something extremely important. China's most frequent missing words are "disarmament", "aggression", "hegemonism", "imperialism". These are not straightforwardly negative in all contexts "disarmament" for example could be framed positively as a peace goal. However, Without 
 access to the surrounding context, we cannot be certain how they would score if 
@@ -84,14 +87,24 @@ China's missing words are "disarmament" (250+ times), "aggression", "hegemonism"
 
 ## Results and Figures
 
+One thing you can see in the figure 1 Starts low (~5.28) in 1972 when the PRC first joined the UN, after 50 years is gradually climbs upwards, and by the 2000s is higher than the USA, generally smoother and more stable year to year
+
+In america the figure is much more volatile, with big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump). Additionally it drops to its lowest point (~5.24) right around the Iraq War in 2003 and has been trending downward in comparison to china since 2008
+
 ### Figure 1 — Emotional Tone Over Time
 ![China vs USA emotional tone](figures/china_vs_usa.png)
+
+After seeing Figure 1, I was curious whether neutral words were flattening the scores. So I ran the analysis again removing all words scoring between 4.0 and 6.0, which only keeps the strong emotionally charged words. The pattern from Figure 1 becomes much clearer here. The gap between China and the USA is more visible, and the USA's dip around 2001–2003 is much more dramatic. which showcases that the pattern is not just an artefact of neutral words.
 
 ### Figure 2 — Emotional Tone with Neutral Words Removed
 ![China vs USA filtered](figures/china_vs_usa_filtered.png)
 
+To check whether the overall difference is statistically significant, This project ran a bootstrap test (see figure 3.) with 10,000 iterations. The observed difference is 0.0351 and the 95% confidence interval is [0.0073, 0.0625] 
+
 ### Figure 3 — Bootstrap Statistical Test
 ![Bootstrap China vs USA](figures/bootstrap_china_usa.png)
+
+The final chart breaks down the average happiness score per leader. For China there is a clear upward pattern — from Mao & Hua (5.339) up to Xi Jinping (5.534). For the USA the pattern is less consistent — Bush Jr and Obama both score below the USA average, while Trump's first term scores relatively high (5.488) and Trump II scores the lowest of all (5.394).
 
 ### Figure 4 — Average Score by Leadership Era
 ![Leaders bar chart](figures/china_vs_usa_leaders.png)
@@ -100,14 +113,83 @@ China's missing words are "disarmament" (250+ times), "aggression", "hegemonism"
 
 ## Critical Reflection and Limitations
 
+1).The biggest limitation of this project is that China's speeches are translations. They were originally delivered in Mandarin and translated into English by UN staff. This means we are not measuring China's actual word choices, we are measuring a translator's interpretation of them.
+
+2). The tool itself. The labMT lexicon was built from American English sources (Twitter, the New York Times, song lyrics - rated by US-based workers on Mechanical Turk). The OOV analysis shows this clearly: words like "hegemonism" and "disarmament" are central to China's diplomatic vocabulary but completely absent from the lexicon. Crucially, these missing words tend toward confrontational language — meaning China's scores may be slightly inflated relative to what a more complete lexicon would produce.
+
+3). the score differences are small. Even though the difference is statistically significant, the scores only range from about 5.2 to 5.7 on a 1–9 scale. A difference of 0.035 points does not mean China is dramatically more positive than the USA.
+
+4).Finally, this project only looks at one speech per country per year. The UN General Debate speech is an important moment, but it does not represent everything a country says at the UN throughout the year.
+
+
 ---
 
+**What this project does not claim:** It does not claim that China is genuinely happier or more positive than the USA. It does not claim that language scores directly measure geopolitical power. It claims only that a measurable difference exists in the emotional tone of these two countries' UN speeches over time, and that this difference correlates with known geopolitical shifts, while acknowledging that the tool's limitations make causal interpretation impossible.
+
+
 ## How to Run
+
+### Repository Structure
+un-hedonometer/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── src/
+│   ├── build_corpus.py
+│   ├── score_speeches.py
+│   ├── analyse.py
+│   ├── analyse_filtered.py
+│   ├── bootstrap.py
+│   ├── leaders.py
+│   ├── coverage.py
+│   └── oov.py
+├── data/
+│   ├── raw/
+│   │   ├── speeches_raw/
+│   │   └── Data_Set_S1.txt
+│   └── processed/
+│       └── speeches_scored.csv
+└── figures/
+
+### Setup
+
+```bash
+git clone https://github.com/simonevanmoerkerk-hash/un-hedonometer.git
+cd un-hedonometer
+python3 -m venv .venv
+source .venv/bin/activate  # On Mac/Linux
+.venv\Scripts\activate     # On Windows
+pip install -r requirements.txt
+```
+
+
+### From Raw Input to Final Output
+
+| Script | Input | Key Output |
+|--------|-------|------------|
+| `build_corpus.py` | `data/raw/speeches_raw/` | `data/processed/speeches.csv` |
+| `score_speeches.py` | `data/processed/speeches.csv` | `data/processed/speeches_scored.csv` |
+| `analyse.py` | `data/processed/speeches_scored.csv` | `figures/china_vs_usa.png` |
+| `analyse_filtered.py` | `data/processed/speeches.csv` | `figures/china_vs_usa_filtered.png` |
+| `bootstrap.py` | `data/processed/speeches_scored.csv` | `figures/bootstrap_china_usa.png` |
+| `leaders.py` | `data/processed/speeches_scored.csv` | `figures/china_vs_usa_leaders.png` |
+| `coverage.py` | `data/processed/speeches_scored.csv` | `figures/coverage_by_decade.png` |
+| `oov.py` | `data/processed/speeches.csv` | `figures/oov_words.png` |
+
+All outputs are saved in `data/processed/` and `figures/`. The pipeline is fully 
+reproducible, deleting any output and rerunning the corresponding script 
+regenerates it from the original inputs.
+
 
 ---
 
 ## Credits and Citation
 
+Dodds, Peter Sheridan, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, and Christopher M. Danforth. 2011. "Temporal Patterns of Happiness and Information in a Global Social Network: Hedonometrics and Twitter." Edited by Johan Bollen. PLoS ONE 6 (12): e26752. https://doi.org/10.1371/journal.pone.0026752.
 ---
 
 ## AI Disclosure
+
+During the code construction process, this project made limited use of AI-based tools for support purposes. In early development, this project consulted DeepSeek and gemine to debug code and clarify technical questions. For parts of the Results section, ChatGPT was used to refine phrasing, improve clarity, and structure initial drafts. Throughout drafting and revision, we used the UvA AI assistant to review wording, check coherence, and strengthen academic tone.
+
+All code was revised and verified. We understand the logic and functionality of each script and can explain analytical steps, statistical calculations, and design choices in detail. AI tools were used as writing and debugging support rather than as a substitute for conceptual understanding or interpretive reasoning. All interpretive claims, methodological decisions, and critical reflections represent our own academic judgment and responsibility.
