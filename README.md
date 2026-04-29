@@ -18,7 +18,9 @@ This question matters for Digital Humanities as it uses computational methods to
 ## Main Finding
 The most interesting finding in this project is that China and the USA swap positions around 2000. before that, the USA scored higher, and after that, China does. This lines up with real world events: China joining the WTO, the Beijing Olympics, Xi Jinping coming to power, while the USA was dealing with 9/11, the Iraq War, and growing political divisions.
 
-However, the OOV analysis adds an important layer onto China's most frequent missing words. Words such as "aggression", "hegemonism", "imperialism", tend toward confrontational language. If these were in the labMT dictionary, China's scores might be lower. This means the finding should be read carefully rather than taken at face value.
+The clearest pattern is that China and the USA swap positions around 2000. Before that, the USA scored higher. After that, China does. The timing lines up with historical moments. For example: China joining the WTO in 2001, the Beijing Olympics in 2008, and Xi Jinping coming to power in 2012, while the USA has: 9/11, the Iraq War, the 2008 financial crisis, and growing political division. The bootstrap test shows this difference is statistically significant (95% CI: [0.0073, 0.0625]), and the filtered analysis shows the gap actually grows when neutral words are removed.
+
+However,the OOV analysis adds an important layer. What the score is actually picking up on is harder to say. The OOV analysis shows that "aggression", "hegemonism", and "imperialism", which are three of the most frequent words in China's speeches, are not in labMT at all. So China's score is built from the words around its most political vocabulary, not from that vocabulary itself. The rise after 2000 might show us a real change in how China talks at the UN, or it might shows  the fact that China's most confrontational language is exactly what the tool cannot read. With this instrument, those two readings cannot really be separated and thus This means the finding should be read carefully rather than taken at face value.
 
 ---
 
@@ -87,44 +89,69 @@ China's missing words are "disarmament" (250+ times), "aggression", "hegemonism"
 
 ## Results and Figures
 
+The initial corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972.
+Therefore, the final dataset contains 108 speeches in total, 54 from China and 54 from the USA, covering every year from 1972 to 2025. After applying the hedonometer, all 108 speeches received a happiness score, since every speech contained at least some words matched in the labMT lexicon. Coverage was high overall, with a mean of 0.915 for China and 0.927 for the USA. No speech had to be excluded from analysis. The figures below visualise the resulting scores in different ways: as a yearly time series (Figure 1), as a filtered version with neutral words removed (Figure 2), as a bootstrap distribution to test for statistical significance (Figure 3), and as averages across leadership eras (Figure 4).
+
+
+
+### Figure 1 — Emotional Tone Over Time
+![China vs USA emotional tone](figures/china_vs_usa.png)
+> *Mean labMT happiness score per year for China (PRC, red solid line) and the USA (blue dashed line) from 1972 to 2025. Vertical dotted lines mark major geopolitical events. The y-axis is restricted to 5.2 to 5.7 to make differences visible, since labMT scores for long texts tend to cluster near 5.*
+
 One thing you can see in the figure 1 Starts low (~5.28) in 1972 when the PRC first joined the UN, after 50 years is gradually climbs upwards, and by the 2000s is higher than the USA, generally smoother and more stable year to year
 
 In america the figure is much more volatile, with big dips around 2001–2003 (9/11 and the Iraq War) and again after 2017 (Trump). Additionally it drops to its lowest point (~5.24) right around the Iraq War in 2003 and has been trending downward in comparison to china since 2008
 
-### Figure 1 — Emotional Tone Over Time
-![China vs USA emotional tone](figures/china_vs_usa.png)
 
-After seeing Figure 1, I was curious whether neutral words were flattening the scores. So I ran the analysis again removing all words scoring between 4.0 and 6.0, which only keeps the strong emotionally charged words. The pattern from Figure 1 becomes much clearer here. The gap between China and the USA is more visible, and the USA's dip around 2001–2003 is much more dramatic. which showcases that the pattern is not just an artefact of neutral words.
+After seeing Figure 1, I was curious whether neutral words were flattening the scores. So I ran the analysis again removing all words scoring between 4.0 and 6.0, which only keeps the strong emotionally charged words. The pattern from Figure 1 becomes much clearer here. The gap between China and the USA is more visible, and the USA's dip around 2001–2003 is much more dramatic.
 
 ### Figure 2 — Emotional Tone with Neutral Words Removed
 ![China vs USA filtered](figures/china_vs_usa_filtered.png)
+> *Mean labMT happiness score per year for China and the USA, with all words scoring between 4.0 and 6.0 removed. Only emotionally charged words contribute to the score. Same time period and event annotations as Figure 1.*
+
+This is a good sign that the pattern is real, but it also changes what the score is measuring. The filtered score is no longer the average emotional weight of the whole speech. It is the average of only the strongly charged words. So Figure 2 tells us that when both countries do use emotional language, China's leans slightly more positive and the USA's leans slightly more negative.
+
 
 To check whether the overall difference is statistically significant, This project ran a bootstrap test (see figure 3.) with 10,000 iterations. The observed difference is 0.0351 and the 95% confidence interval is [0.0073, 0.0625] 
 
 ### Figure 3 — Bootstrap Statistical Test
 ![Bootstrap China vs USA](figures/bootstrap_china_usa.png)
+> *Bootstrap distribution of the difference in mean happiness scores between China and the USA over 10,000 iterations. The red line marks the observed difference (0.0351). Dashed grey lines mark the 95% confidence interval [0.0073, 0.0625]. The dotted line at zero is not inside the interval.*
 
-The final chart breaks down the average happiness score per leader. For China there is a clear upward pattern — from Mao & Hua (5.339) up to Xi Jinping (5.534). For the USA the pattern is less consistent — Bush Jr and Obama both score below the USA average, while Trump's first term scores relatively high (5.488) and Trump II scores the lowest of all (5.394).
+What "statistically significant" actually means here is worth being careful about. It means the gap is unlikely to come from random sampling noise. It does not mean the gap is large or important in everyday terms. A difference of 0.035 points on a 1 to 9 scale is small. 
+
+
+
 
 ### Figure 4 — Average Score by Leadership Era
 ![Leaders bar chart](figures/china_vs_usa_leaders.png)
+> *Mean labMT happiness score per leader, shown as horizontal bar charts. The USA is on the left (blue), China on the right (red). The grey lines mark each country's overall average across 1972 to 2025.*
+
+As a supplementary analysis, I broke down the average happiness score by 
+leadership era to see if the overall trend holds within each period. For China 
+there is a clear upward pattern: Mao and Hua (5.339), Deng Xiaoping (5.385), Jiang Zemin (5.447), Hu Jintao (5.551), Xi Jinping (5.534). Which shows that China's diplomatic tone has become steadily more positive over time.
+
+For the USA the pattern is less consistent. Bush Jr and Obama both score below 
+the USA average, while Reagan & Bush Sr score the highest. Trump's first term 
+scores relatively high (5.488) while Trump II scores the lowest of all (5.394). 
+This also shows the unpredictable nature of US diplomatic tone compared to China's steady rise. It is worth noting that this chart averages across multiple years per leader, which smooths out year-by-year variation, so individual peaks and dips disappear. It also gives the impression that leaders are responsible for the score, when in reality each speech is written by speechwriters and reflects whatever was politically relevant that year. The chart is thus useful for showing that the upward trend in China holds across very different leadership styles, but it should not be read as a ranking of leaders or a measurement of their personal influence on tone.
+
 
 ---
 
 ## Critical Reflection and Limitations
 
-1).The biggest limitation of this project is that China's speeches are translations. They were originally delivered in Mandarin and translated into English by UN staff. This means we are not measuring China's actual word choices, we are measuring a translator's interpretation of them.
+1).The biggest limitation of this project is that China's speeches are translations. They were originally delivered in Mandarin and translated into English by UN staff. A diplomat saying something carefully ambiguous in Mandarin can become more positive or more negative depending on how it is rendered in English. This means we are not measuring China's actual word choices, we are measuring a translator's interpretation of them.
 
-2). The tool itself. The labMT lexicon was built from American English sources (Twitter, the New York Times, song lyrics - rated by US-based workers on Mechanical Turk). The OOV analysis shows this clearly: words like "hegemonism" and "disarmament" are central to China's diplomatic vocabulary but completely absent from the lexicon. Crucially, these missing words tend toward confrontational language — meaning China's scores may be slightly inflated relative to what a more complete lexicon would produce.
+2). The tool itself. The labMT lexicon was built from American English sources (Twitter, the New York Times, song lyrics, rated by US-based workers on Mechanical Turk). The OOV analysis shows this clearly: words like "hegemonism" and "disarmament" are central to China's diplomatic vocabulary but completely absent from the lexicon. Crucially, these missing words tend toward confrontational language, meaning China's scores may be slightly inflated relative to what a more complete lexicon would produce.
 
-3). the score differences are small. Even though the difference is statistically significant, the scores only range from about 5.2 to 5.7 on a 1–9 scale. A difference of 0.035 points does not mean China is dramatically more positive than the USA.
+3). The score differences are small. Even though the difference is statistically significant, the scores only range from about 5.2 to 5.7 on a 1–9 scale. A difference of 0.035 points does not mean China is dramatically more positive than the USA.
 
 4).Finally, this project only looks at one speech per country per year. The UN General Debate speech is an important moment, but it does not represent everything a country says at the UN throughout the year.
 
 
 ---
-
-**What this project does not claim:** It does not claim that China is genuinely happier or more positive than the USA. It does not claim that language scores directly measure geopolitical power. It claims only that a measurable difference exists in the emotional tone of these two countries' UN speeches over time, and that this difference correlates with known geopolitical shifts, while acknowledging that the tool's limitations make causal interpretation impossible.
+**What this project does not claim:** It does not claim that China is genuinely happier or more positive than the USA. It does also not claim that language scores measure geopolitical power, or that the labMT score captures the full emotional content of these speeches. It claims only that a measurable, statistically significant difference exists in how the tool reads these two countries UN speeches over time. This difference additionally correlates with known historic geopolitical moments, and that this has to be read alongside what the tool cannot see.
 
 
 ## How to Run
