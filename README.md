@@ -7,15 +7,17 @@ This project looks at how emotional language differs between China and the USA b
 
 **How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?**
 
-The question is also about the tool itself. The labMT hedonometer was built from one variety of English: American, contemporary, drawn from informal sources like Twitter and song lyrics. China's UN speeches are also in English, but a very different kind of English. They are translated from Mandarin by UN staff, written in a formal diplomatic register, and built around political vocabulary that the lexicon was not designed to read. By comparing the two countries over 50 years, this project asks not only what the scores show, but also what kinds of language the tool can read and what it cannot.Therefore, the instrument becomes part of the analysis.
+Additionally, the question is also about the tool itself. The labMT hedonometer was built from American English, drawn from informal sources like Twitter and song lyrics. China's UN speeches are also in English, but a very different type of English. They are translated from Mandarin by UN staff, written in a formal diplomatic register, and built around political vocabulary. By comparing the two countries over 50 years, this project asks not only what the scores show, but also what kinds of language the tool can read and what it cannot. Therefore, the instrument becomes part of the analysis.
 
 
 ## Relevance
-Digital Humanities research often uses sentiment analysis without questioning how the tool itself works across different contexts. This project asks a similar basic question: can a happiness lexicon built from contemporary American English actually capture diplomatic English used by a non-Western state? The UN General Debate is one of the few forums where every country speaks in a comparable format every year, which makes it an  good corpus for tracking how nations present themselves over time. China and the USA are especially interesting to compare because the past 50 years have seen a major shift in global power between them.
+Digital Humanities research often uses sentiment analysis without questioning how the tool itself works across different contexts. This project asks a similar basic question: can a happiness lexicon built from contemporary American English actually capture diplomatic English used by a non-Western country? The UN General Debate is one of the few forums where every country speaks in a comparable format every year, which makes it an  good corpus for tracking how nations present themselves over time. China and the USA are especially interesting to compare because the past 50 years have seen a major shift in global power between them.
 
-This matters for Digital Humanities more broadly because computational tools are never neutral. They carry the assumptions of the contexts they were built in. The labMT lexicon was built from American English sources like Twitter, the New York Times, and song lyrics, rated by US-based workers on Mechanical Turk. None of those sources are diplomatic, and none of them are non-Western. By applying this tool to UN speeches, this project does not try to fix that mismatch. It uses the mismatch as part of the analysis, treating what the tool can and cannot read as a meaningful part of the result.
+This matters for Digital Humanities more broadly because computational tools are never neutral. They carry the assumptions of the contexts they were built in. The labMT lexicon was built from American English sources like Twitter, the New York Times, and song lyrics, rated by Mechanical Turk. None of those sources are diplomatic, and none of them are non-Western. By applying this tool to UN speeches, this project does not try to fix that mismatch. It uses the mismatch as part of the analysis, treating what the tool can and cannot read as a meaningful part of the result.
 
 ## Main Finding
+The central finding is that China and America's UN speeches show no statistically significant difference in average happiness scores, however it does show other things.
+
 The most interesting finding in this project is that China and the USA swap positions around 2000. before that, the USA scored higher, and after that, China does. This lines up with real world events: China joining the WTO, the Beijing Olympics, Xi Jinping coming to power, while the USA was dealing with 9/11, the Iraq War, and growing political divisions.
 
 The clearest pattern is that China and the USA swap positions around 2000. Before that, the USA scored higher. After that, China does. The timing lines up with historical moments. For example: China joining the WTO in 2001, the Beijing Olympics in 2008, and Xi Jinping coming to power in 2012, while the USA has: 9/11, the Iraq War, the 2008 financial crisis, and growing political division. The bootstrap test shows this difference is statistically significant (95% CI: [0.0073, 0.0625]), and the filtered analysis shows the gap actually grows when neutral words are removed.
@@ -27,21 +29,20 @@ However,the OOV analysis adds an important layer. What the score is actually pic
 # Corpus and Provenance
 
 
-## Where The Data Came From
-The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972, as this is the year that PRC joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
+## UN General Debate Corpus
+The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972. The People Republic of China (PRC) joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
 
-## What Metadata Enables the Comparison
-The speeches are stored as plain text files, organised by year and country. Each filename follows the format `CHN_26_1971.txt` (country code, session number, year). The metadata that makes this comparison meaningful is the country code and year, which allows tracking each countries tone over the years.
+The speeches are stored as plain text files, organised by year and country. Each filename follows the format `CHN_27_1972.txt` (country code, session number, year). The metadata that makes this comparison meaningful is the country code and year, which allows tracking each countries tone over the years.
 
-## What The Source Leaves Out
 It is worth noting that speeches were originally delivered in the speaker's native language and then translated into English by UN staff. China's speeches were therefore originally in Mandarin. This means we are measuring a translated version of Chinese diplomacy, which is a limitation discussed further in the reflection section.
 
-- Only one speech per country per year,  not all UN activity throughout the year
+**what the corpus leaves out**:
+- Only one speech per country per year. The corpus does not include speeches from UN Security Council meetings, committee sessions, or other UN forums
 - Speeches were originally delivered in the speaker's native language and translated into English by UN staff. China's speeches were therefore originally in Mandarin
-- The corpus does not include speeches from UN Security Council meetings, committee sessions, or other UN forums
 
-Source: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0TJX8Y
-Date of access: April 2026
+**Source:** https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0TJX8Y
+
+**Date of access:** April 2026
 
 **How this corpus differs from the first attempt:** The first project used artwork titles from the Metropolitan Museum of Art API. This project uses political UN speeches from a completely different source, domain, and institution. The comparison here is longitudinal (over time) rather than categorical (Eastern vs Western aesthetic concepts).
 
@@ -61,10 +62,9 @@ The filtered analysis (Figure 2) removes words based on their happiness score at
 Each word was looked up in the labMT 1.0 lexicon (Dodds et al., 2011), which contains 10,222 English words rated on a happiness scale from 1 to 9 by workers on Amazon Mechanical Turk. A score of 1 means very negative (like "terrorist" or "death"), 9 means very positive (like "laughter" or "love"), and 5 is neutral. Words that matched were averaged together to produce one happiness score per speech. Words that did not match were ignored.
 
 ### Scoring Choices
-Each speech gets one happiness score, which is the average of all the matched words in that speech. So instead of looking at individual sentences, the whole speech is collapsed into one number. This project is nterested in the overall tone of each country per year, not specific moments within a speech.
+Each speech gets one happiness score, which is the average of all the matched words in one speech. Moreover, instead of looking at individual sentences, the whole speech is collapsed into one number. As this project is interested in the overall tone of each country per year, not specific moments within a speech.
 
 One side effect of this is that long speeches with lots of neutral words will always produce scores close to 5. Which is the middle of the labMT scale. This is why the scores in Figure 1 sit between 5.2 and 5.7, even though the speeches are about genuinely emotional topics like war, peace, and geopolitical conflict. I was curious whether this was hiding real differences, so I ran the analysis again but this time removed all words scoring between 4.0 and 6.0. This follows the approach suggested by Dodds et al. (2011) in the original labMT paper. The result is Figure 2 and the pattern becomes clearer.
-
 
 ### Coverage and OOV
 Coverage measures the proportion of words in a speech that were successfully matched to the labMT lexicon. China's mean coverage is slightly lower than the USA's across all decades (see Figure 5), which suggests that the tool engages with China's diplomatic vocabulary slightly less well.
@@ -73,7 +73,7 @@ Coverage measures the proportion of words in a speech that were successfully mat
 ![Coverage by decade](figures/coverage_by_decade.png)
 > *China (red) consistently has lower coverage than the USA (blue) in every single decade. China's coverage drops in the 2020s to about 0.905, while the USA stays at 0.925. This means more of China's recent speeches contain words the labMT dictionary doesn't recognise.
 
-Additionally, the OOV analysis (see figure 6) reveals something extremely important. China's most frequent missing words are "disarmament", "aggression", "hegemonism", "imperialism". These are not straightforwardly negative in all contexts "disarmament" for example could be framed positively as a peace goal. However, Without 
+Additionally, the OOV analysis (see figure 6) reveals something extremely important. China's most frequent missing words are "disarmament", "aggression", "hegemonism", "imperialism". These are not straightforwardly negative in all contexts "disarmament" for example could be framed positively as a peace goal. Additionally the word  However, Without 
 access to the surrounding context, we cannot be certain how they would score if 
 they were in the labMT dictionary. The same applies to the USA where words such as "terrorists", "proliferation", "humanitarian", "democracies" are all missing too, and these would pull the score in different directions depending on how they were rated. The key point is that both countries' final scores are shaped not just by what the tool can read, but also by what it cannot. Any comparison between the two should be read with this in mind.
 
@@ -115,14 +115,11 @@ To check whether the overall difference is statistically significant, This proje
 
 What "statistically significant" actually means here is worth being careful about. It means the gap is unlikely to come from random sampling noise. It does not mean the gap is large or important in everyday terms. A difference of 0.035 points on a 1 to 9 scale is small. 
 
-
-
-
 ### Figure 4 — Average Score by Leadership Era
 ![Leaders bar chart](figures/china_vs_usa_leaders.png)
 > *Mean labMT happiness score per leader, shown as horizontal bar charts. The USA is on the left (blue), China on the right (red). The grey lines mark each country's overall average across 1972 to 2025.*
 
-As a supplementary analysis, I broke down the average happiness score by 
+An additional analysis was used, I broke down the average happiness score by 
 leadership era to see if the overall trend holds within each period. For China 
 there is a clear upward pattern: Mao and Hua (5.339), Deng Xiaoping (5.385), Jiang Zemin (5.447), Hu Jintao (5.551), Xi Jinping (5.534). Which shows that China's diplomatic tone has become steadily more positive over time.
 

@@ -21,8 +21,9 @@ df = pd.read_csv("data/processed/speeches.csv")
 # By removing neutral words, only emotionally charged words contribute to the score
 # This makes differences between groups more visible
 
-FILTER_LOW = 4.0   # remove words scoring below this... wait no
-FILTER_HIGH = 6.0  # ...remove words scoring between 4 and 6 (neutral zone)
+FILTER_LOW = 4.0   # words scoring BELOW 4.0 are kept (negative words)
+FILTER_HIGH = 6.0  # words scoring ABOVE 6.0 are kept (positive words)
+                   # words between 4.0 and 6.0 are removed (neutral zone)
 
 def score_filtered(text):
     if not isinstance(text, str):
