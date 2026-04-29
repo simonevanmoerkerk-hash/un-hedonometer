@@ -5,13 +5,12 @@
 ## Research Question
 This project looks at how emotional language differs between China and the USA by applying the labMT hedonometer to UN General Debate speeches from 1972 to 2025. The central research question asks:
 
-*How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?*
+**How has the emotional tone of China's (PRC) UN General Debate speeches evolved since joining the United Nations in 1972, and how does that trajectory compare to the United States over the same period(1972-2025)?**
 
 The question is also about the tool itself. The labMT hedonometer was built from one variety of English: American, contemporary, drawn from informal sources like Twitter and song lyrics. China's UN speeches are also in English, but a very different kind of English. They are translated from Mandarin by UN staff, written in a formal diplomatic register, and built around political vocabulary that the lexicon was not designed to read. By comparing the two countries over 50 years, this project asks not only what the scores show, but also what kinds of language the tool can read and what it cannot.Therefore, the instrument becomes part of the analysis.
 
 
 ## Relevance
-
 Digital Humanities research often uses sentiment analysis without questioning how the tool itself works across different contexts. This project asks a similar basic question: can a happiness lexicon built from contemporary American English actually capture diplomatic English used by a non-Western state? The UN General Debate is one of the few forums where every country speaks in a comparable format every year, which makes it an  good corpus for tracking how nations present themselves over time. China and the USA are especially interesting to compare because the past 50 years have seen a major shift in global power between them.
 
 This matters for Digital Humanities more broadly because computational tools are never neutral. They carry the assumptions of the contexts they were built in. The labMT lexicon was built from American English sources like Twitter, the New York Times, and song lyrics, rated by US-based workers on Mechanical Turk. None of those sources are diplomatic, and none of them are non-Western. By applying this tool to UN speeches, this project does not try to fix that mismatch. It uses the mismatch as part of the analysis, treating what the tool can and cannot read as a meaningful part of the result.
@@ -25,13 +24,13 @@ However,the OOV analysis adds an important layer. What the score is actually pic
 
 ---
 
-## Corpus and Provenance
+# Corpus and Provenance
 
 
-### Where the data came from
+## Where the data came from
 The data comes from the UN General Debate Corpus (UNGDC), created by Baturo, Dasandi, and Mikhaylov (2017) and hosted on Harvard Dataverse. The full corpus contains over 11,000 speeches from 193 countries, covering 1946 to 2025. For this project, only China (CHN) and the USA were kept, starting from 1972, as this is the year that PRC joined the UN on October 25, 1971, meaning 1972 is the first full year where People's Rublic of China was represented. Before that, the "CHN" speeches were in the corpus.
 
-### What metadata enables the comparison
+#### What metadata enables the comparison
 The speeches are stored as plain text files, organised by year and country. Each filename follows the format `CHN_26_1971.txt` (country code, session number, year). The metadata that makes this comparison meaningful is the country code and year, which allows tracking each countries tone over the years.
 
 ### What the source leaves out
@@ -75,7 +74,7 @@ Coverage measures the proportion of words in a speech that were successfully mat
 
 #### Figure 5 — labMT Coverage by Decade
 ![Coverage by decade](figures/coverage_by_decade.png)
-!!China (red) consistently has lower coverage than the USA (blue) in every single decade. China's coverage drops in the 2020s to about 0.905, while the USA stays at 0.925. This means more of China's recent speeches contain words the labMT dictionary doesn't recognise.
+> *China (red) consistently has lower coverage than the USA (blue) in every single decade. China's coverage drops in the 2020s to about 0.905, while the USA stays at 0.925. This means more of China's recent speeches contain words the labMT dictionary doesn't recognise.
 
 Additionally, the OOV analysis (see figure 6) reveals something extremely important. China's most frequent missing words are "disarmament", "aggression", "hegemonism", "imperialism". These are not straightforwardly negative in all contexts "disarmament" for example could be framed positively as a peace goal. However, Without 
 access to the surrounding context, we cannot be certain how they would score if 
@@ -83,7 +82,7 @@ they were in the labMT dictionary. The same applies to the USA where words such 
 
 #### Figure 6 — Out-of-Vocabulary Words
 ![OOV words](figures/oov_words.png)
-China's missing words are "disarmament" (250+ times), "aggression", "hegemonism", "imperialism". The USA's missing words are "terrorists", "proliferation", "humanitarian" and "democracies".
+> *China's missing words are "disarmament" (250+ times), "aggression", "hegemonism", "imperialism". The USA's missing words are "terrorists", "proliferation", "humanitarian" and "democracies".
 
 
 ---
