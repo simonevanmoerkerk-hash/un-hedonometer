@@ -64,25 +64,25 @@ Each speech gets one happiness score, which is the average of all the matched wo
 One side effect of this is that long speeches with lots of neutral words will always produce scores close to 5. Which is the middle of the labMT scale. This is why the scores in Figure 1 sit between 5.2 and 5.7, even though the speeches are about genuinely emotional topics like war, peace, and geopolitical conflict. I was curious whether this was hiding real differences, so I ran the analysis again but this time removed all words scoring between 4.0 and 6.0. This follows the approach suggested by Dodds et al. (2011) in the original labMT paper. The result is Figure 2 and the pattern becomes clearer.
 
 ### Coverage and OOV
-Coverage measures the proportion of words in a speech that were successfully matched to the labMT lexicon. China's mean coverage is slightly lower than the USA's across all decades (see Figure 1), which suggests that the tool engages with China's diplomatic vocabulary slightly less well.
+The coverage measures the proportion of words in a speech that were successfully matched to the labMT lexicon. Figure 1 shows the labMT lexicon coverage across six decades for both China (PRC) and the United States. Overall, coverage remains consistently high,with all being above 0.800 for both countries, ranging from approximately 0.897 to 0.923 for China and 0.923 to 0.930 for the United States across the full 1970s–2020s period. Which confirms that the lexicon captures the large majority of words in both corpora. However, the United States shows a small but persistent higher coverage over China across all decades. The gap is small, but it shows a systematic consistency across all six decades. 
+
+The lower coverage in during the 1970s in China and in the 2020s are also interesting. Both periods coincide with historically distinct vocabulary. Such as: the language of the Cultural Revolution's aftermath (1960s), COVID-era and political terminology in the later one, which the lexicon was not built to capture. They unravel a limitation that will be discussed further in the OOV section below.
+
 
 #### Figure 1 - labMT Coverage by Decade
 ![Coverage by decade](figures/coverage_by_decade.png)
 > *China (red) consistently has lower coverage than the USA (blue) in every single decade. China's coverage drops in the 2020s to about 0.905, while the USA stays at 0.925. This means more of China's recent speeches contain words the labMT dictionary doesn't recognise.
 
-Additionally, the OOV analysis (see figure 2) reveals something extremely important. China's most frequent missing words are "disarmament" and "aggression", which are over 200+ times, and America's most frequent words such as "Terrorists" and "Proliferation" are only missing over 100+.
+The labMT coverage figure above has a match rate of 90%+, which appears strong in absolute terms. However the out-of-vocabulary (OOV) words are not random noise. The words to cluster around neologisms, political terminology, and historically specific vocabulary, which is precisely the words most likely to carry sentiment signal in state-level discourse. Their systematic exclusion may therefore introduce bias into the happiness scores.
 
-Most Chinese words missing in the labMT Lexicon are not straightforwardly negative in all contexts "disarmament" for example could be framed positively as a peace goal and "kampuchea" refers to Cambodia. However, we cannot be certain how they would score if they were in the labMT dictionary. 
+Figure 2 showcases the most frequent OOV words for each country. China's most common missing terms include "disarmament" (appearing over 250 times), "aggression" (over 100 times), "kampuchea", "hegemonism", and "imperialism". The United States' most frequent missing terms include "terrorists" and "proliferation" (both over 100 times), alongside "strengthen", "humanitarian", and "economies".What is interesting is that the missing words are not straightforwardly negative or positive. "Disarmament" for example could be framed positively as a peace goal and "kampuchea" refers to Cambodia. Whilst "agression" and "imperialism" would most likely be negative. The same goes for the United States. The words "humanitiarian" could score positive and "terrorists" and "proliferation" would likely score negative. 
 
-However, comparing the two, does showcase the limitations of not having all the words, especially in chinese contexts
+Finnally, It is also worth noting that the missing words are not equally weighted between the two countries. China's most frequent OOV words, like "disarmament" and "kampuchea", are quite neutral or ambiguous. The United States' most frequent missing words, "terrorists" and "proliferation", are much more clearly negative. If these words had been included in the scoring, they would likely have pulled America's happiness scores down.
 
-"hegemonism", "imperialism". These are not straightforwardly negative in all contexts "disarmament" for example could be framed positively as a peace goal.   However, Without 
-access to the surrounding context, we cannot be certain how they would score if 
-they were in the labMT dictionary. The same applies to the USA where words such as "terrorists", "proliferation", "humanitarian", "democracies" are all missing too, and these would pull the score in different directions depending on how they were rated. The key point is that both countries' final scores are shaped not just by what the tool can read, but also by what it cannot. Any comparison between the two should be read with this in mind.
 
 #### Figure 2 - Out-of-Vocabulary Words
 ![OOV words](figures/oov_words.png)
-> *China's missing words are "disarmament" (250+ times), "aggression", "hegemonism", "imperialism". The USA's missing words are "terrorists", "proliferation", "humanitarian" and "democracies".
+> *China's missing words are "disarmament" (250+ times), "aggression (100+ times)","kampuchea", "hegemonism", "imperialism". The USA's missing words are "terrorists (100+ times)", "proliferation" (100+ times), "strenghten", "humanitarian" and "economies".
 
 
 ---
